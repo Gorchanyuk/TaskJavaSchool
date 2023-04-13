@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 public class ParseQuery {
 
     private final String regex =
-            "(?i)^(INSERT|UPDATE|SELECT|DELETE)\\s*(?:(?:VALUES)\\s*(.*?))?\\s*(?:(?:WHERE\\s*)(.+))?$";
+            "(?i)^\\s*(INSERT|UPDATE|SELECT|DELETE)\\s*(?:(?:VALUES)\\s*(.*?))?\\s*(?:(?:WHERE\\s*)(.+))?$";
     private final String valueRegex =
             "(?i)(.*?)?\\s*('(\\w+)'\\s*=\\s*(-?\\d+(?:\\.\\d+)?|true|false|null|'(?:[^']*?)'))?\\s*(?:,|$)";
     private final String whereRegex =
