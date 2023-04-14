@@ -216,6 +216,8 @@ public class ParseQuery {
             } else {
                 //Если valuesCanBeNull = false, получаем актуальный тип полученных данных
                 currentType = getTypeValueFromRequest(value);
+                if(currentType == null)
+                    throw new Exception("Значения которые передаются на сравнение не могут быть null");
             }
             if (currentType.equals("String") && !value.equalsIgnoreCase("null")) {
                 // Если тип значения это строка и не равна null"
@@ -226,9 +228,6 @@ public class ParseQuery {
             Class clazz = Class.forName("java.lang." + currentType);
             if (value.equalsIgnoreCase("null") && valuesCanBeNull) {
                 res.put(column.getName(), null);
-            } else if (value.equalsIgnoreCase("null")) {
-//                Значения переданные в блоке WHERE не могут равняться null
-                throw new Exception("Значения которые передаются на сравнение не могут быть null");
             } else if (clazz.equals(Boolean.class)) {
 //                Значения которые передаются в колонку со значением bool могут равняться только true или false
                 if (!value.equalsIgnoreCase("true") && !value.equalsIgnoreCase("false")) {
@@ -244,7 +243,7 @@ public class ParseQuery {
                 //если дошли до сюда значит колонка имеет тип String, записываем значение пришедшее в метод
                 res.put(column.getName(), value);
             }
-        } catch (Exception e) {
+        }catch (Exception e){
             e.printStackTrace();
         }
         return res;

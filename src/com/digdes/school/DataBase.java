@@ -18,8 +18,8 @@ public class DataBase {
         return table;
     }
 
-    public static List<Map<String, Object>> executeQuery(String request) {
-        try {
+    public static List<Map<String, Object>> executeQuery(String request) throws Exception {
+
             ParseQuery parseQuery = new ParseQuery(request);
             String typeOperation = parseQuery.getTypeOperation();
 
@@ -33,10 +33,7 @@ public class DataBase {
                 case "DELETE":
                     return deleteQuery(parseQuery);
             }
-        } catch (
-                Exception e) {
-            e.printStackTrace();
-        }
+
         return new ArrayList<>();
     }
 
